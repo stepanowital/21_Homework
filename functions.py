@@ -14,6 +14,11 @@ store.add("конфеты", 20)
 
 shop = Shop()
 
+storages = {
+	"склад": store,
+	"магазин": shop
+}
+
 
 def main():
 	"""
@@ -34,14 +39,20 @@ def main():
 		if basic_request in ["stop", "стоп"]:
 			break
 
-		request = Request(basic_request)
+		request = Request(basic_request, storages)
 
-		if not store.check_item(request.full_request()["product"]):
+		if request.destination not in storages or request.departure not in storages:
+			print("Введено название неизвестного склада")
+			print()
+			sleep(1)
+			continue
+
+		if not store.check_item(request.product):
 			print("Данного товара нет на складе")
 			print()
 			sleep(1)
 			continue
-		if store.check_quantity_limits(request.full_request()["product"]) < request.full_request()["amount"]:
+		if store.check_quantity_limits(request.product) < request.amount:
 			print("Не хватает на складе, попробуйте заказать меньше")
 			print()
 			sleep(1)
@@ -52,7 +63,7 @@ def main():
 				print()
 				sleep(1)
 				continue
-		if shop.get_free_space() < request.full_request()["amount"]:
+		if shop.get_free_space() < request.amount:
 			print(f"В {shop.name} недостаточно места, попробуйте что-то другое)")
 			print()
 			sleep(1)
@@ -62,15 +73,15 @@ def main():
 		sleep(1)
 
 		store.remove(
-			request.full_request()["product"],
-			request.full_request()["amount"])
+			request.product,
+			request.amount)
 		sleep(1)
 
 		print(
-			f'Курьер везет {request.full_request()["amount"]} {request.full_request()["product"]} со склада в магазин')
+			f'Курьер везет {request.amount} {request.product} со склада в магазин')
 		sleep(1)
 
-		shop.add(request.full_request()["product"], request.full_request()["amount"])
+		shop.add(request.product, request.amount)
 		sleep(1)
 
 		store.get_full_report()
