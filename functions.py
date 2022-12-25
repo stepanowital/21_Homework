@@ -1,5 +1,7 @@
 from time import sleep
-from classes import Request, Store, Shop
+from store import Store
+from shop import Shop
+from request import Request
 
 
 store = Store()

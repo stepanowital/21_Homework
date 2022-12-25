@@ -1,4 +1,7 @@
-class Storage:
+from abc import ABC
+
+
+class Storage(ABC):
 	def __init__(self, capacity=500000):
 		self.name = None
 		self.items = {}
@@ -51,39 +54,3 @@ class Storage:
 		print(f"Свободного места осталось: {self.get_free_space()}")
 		print(f"Количество уникальных товаров {self.get_unique_items_count()}")
 		print("-" * 20)
-
-
-class Store(Storage):
-	def __init__(self, capacity=100):
-		super().__init__(capacity)
-		self.items = {}
-		self.name = "склад"
-
-	def __repr__(self):
-		return print(self.name)
-
-
-class Shop(Storage):
-	def __init__(self, capacity=20):
-		super().__init__(capacity)
-		self.unique_items_count = 5
-		self.name = "магазин"
-
-	def __repr__(self):
-		return print(self.name)
-
-
-class Request:
-	def __init__(self, basic_request):
-		self.departure = basic_request.split(" ")[3].lower()
-		self.destination = basic_request.split(" ")[5].lower()
-		self.amount = int(basic_request.split(" ")[0])
-		self.product = basic_request.split(" ")[1].lower()
-
-	def full_request(self):
-		return {
-			"from": self.departure,
-			"to": self.destination,
-			"amount": self.amount,
-			"product": self.product
-		}
