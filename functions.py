@@ -14,6 +14,8 @@ store.add("конфеты", 20)
 
 shop = Shop()
 
+shop.add("мороженое", 5)
+
 storages = {
 	"склад": store,
 	"магазин": shop
