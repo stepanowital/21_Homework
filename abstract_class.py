@@ -48,7 +48,7 @@ class Storage(ABC):
 
 	def get_full_report(self):
 		print("-" * 20)
-		print(f"В {self.name} хранится: ")
+		print(f"В {self.name}е хранится: ")
 		for title, quantity in self.items.items():
 			print(quantity, title)
 		print(f"Свободного места осталось: {self.get_free_space()}")

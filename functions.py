@@ -3,7 +3,6 @@ from store import Store
 from shop import Shop
 from request import Request
 
-
 store = Store()
 #
 store.add("вафли", 10)
@@ -28,7 +27,12 @@ def main():
 	print()
 
 	while True:
-		basic_request = input('Введите запрос (Пример: "5 вафли из склад в магазин")\n')
+		basic_request = input(
+			'Введите запрос (Пример: "5 вафли из склад в магазин")\n'
+			'Введите "стоп" или "stop" чтобы прекратить\n')
+
+		if basic_request in ["stop", "стоп"]:
+			break
 
 		request = Request(basic_request)
 
