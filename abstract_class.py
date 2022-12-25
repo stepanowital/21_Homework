@@ -20,7 +20,7 @@ class Storage(ABC):
 		elif current_qnt == quantity:
 			self._set_quantity_remove(title, current_qnt)
 			del self.items[title]
-		print(f"Курьер забрал {quantity} {title} со {self.name}")
+		print(f"Курьер забрал {quantity} {title} из {self.name}")
 
 	def check_quantity_limits(self, title):
 		current_qnt = self.items[title]
